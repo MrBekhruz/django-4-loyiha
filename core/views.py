@@ -1,7 +1,8 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404, redirect
 from .models import *
 from .forms import *
 from django.http import HttpResponse
+
 def home(request):
     # categories = Category.objects.all()
     # post = Post.objects.all()
@@ -31,12 +32,36 @@ def post_detail(request,pk):
 
 def post_create(request):
     if request.method == 'POST':
-        ozodbek = PostForm(request.POST)
+        ozodbek = PostForm(request.POST,request.FILES)
         if ozodbek.is_valid():
             ozodbek.save()
-        return HttpResponse(f"ozodbilan qilingan darsdagi post muvofaqiyatli saqlandi😉😉😉!!!")
+        return redirect('home')
     
     else:
         ozodbek = PostForm()
 
     return render(request, 'post_create.html', {'ozodbek':ozodbek})
+
+
+def post_update(request,pk):
+    post = get_object_or_404(Post,pk=pk)
+    if request.method == 'POST':
+        ozodbek = PostForm(request.POST,request.FILES,instance=post)
+        if ozodbek.is_valid():
+            ozodbek.save()
+            return render('home')
+    else:
+        ozodbek=PostForm(instance=post)
+    context = {
+        'ozodbek':ozodbek,
+        'post':post
+    }
+    return render(request,'post_update.html',context)
+
+
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('home')
+    return render(request, 'post_delete.html', {'post':post})

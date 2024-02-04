@@ -83,7 +83,8 @@
                                     <p>{{posts.content}}</p>
                                     <small><a href="blog-category-01.html" title="">{{posts.category}}</a></small>
                                     <small><a href="single.html" title="">{{posts.date}}</a></small>
-                                    <small><a href="blog-author.html" title="">by Boby</a></small>
+                                    <small><a style="color: yellowgreen;" href="{% url 'post_tahrirlash' pk=posts.pk  %}" title="">update</a></small>
+                                    <small><a style="color: blueviolet;" href="{% url 'delete' pk=posts.pk  %}" title="">delete</a></small>
                                     
                                 </div><!-- end meta -->
                             </div><!-- end blog-box -->

@@ -6,13 +6,16 @@
     <title>post yaratish sahifasi</title>
 </head>
 <body>
+    <center>
     <h1>
         Post yaratish
     </h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ozodbek}}
         <button type="submit">saqlash</button>
     </form>
+    
+</center>
 </body>
 </html>
