@@ -28,16 +28,16 @@
     <!-- END LOADER -->
 
     <div id="wrapper">
-        <div class="collapse top-search" id="collapseExample">
+        <!-- <div class="collapse top-search" id="collapseExample">
             <div class="card card-block">
                 <div class="newsletter-widget text-center">
                     <form class="form-inline">
                         <input type="text" class="form-control" placeholder="What you are looking for?">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     </form>
-                </div><!-- end newsletter -->
+                </div>
             </div>
-        </div><!-- end top-search -->
+        </div> -->
 
         
         {% include 'base/navbar.html' %}
@@ -72,7 +72,7 @@
                                 <div class="col-md-4">
                                     <div class="post-media">
                                         <a href="{{posts.get_absolute_url}}" title="">
-                                            <img src="{posts.objectcha.image.url}" alt="" class="img-fluid">
+                                            <img src="{posts.ozodbek.image.url}" alt="" class="img-fluid">
                                             <div class="hovereffect"></div>
                                         </a>
                                     </div><!-- end media -->
@@ -83,9 +83,12 @@
                                     <p>{{posts.content}}</p>
                                     <small><a href="blog-category-01.html" title="">{{posts.category}}</a></small>
                                     <small><a href="single.html" title="">{{posts.date}}</a></small>
+                                    
+                                     {% if request.user.is_authenticated %}
                                     <small><a style="color: yellowgreen;" href="{% url 'post_tahrirlash' pk=posts.pk  %}" title="">update</a></small>
                                     <small><a style="color: blueviolet;" href="{% url 'delete' pk=posts.pk  %}" title="">delete</a></small>
-                                    
+                                    {% else %}
+                                    {% endif %}
                                 </div><!-- end meta -->
                             </div><!-- end blog-box -->
                         {% endfor %}
